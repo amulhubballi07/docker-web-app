@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    container_name: flask-docker-app
+    ports:
+      - "5000:5000"
+    environment:
+      - APP_ENV=Production-Docker
+      - DB_PATH=/app/data/notes.db
+    volumes:
+      - app_data:/app/data
+    networks:
+      - app_network
+    restart: unless-stopped
+
+volumes:
+  app_data:
+
+networks:
+  app_network:
+    driver: bridge
